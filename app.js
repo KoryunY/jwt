@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const app = express();
 const userRouter = require("./route/userRoute");
@@ -29,9 +31,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-    .connect(
-        'mongodb+srv://root:root@testcluster.w3klz.mongodb.net/jwtDb?retryWrites=true&w=majority'
-    )
+    .connect(process.env.MONGO_URL)
     .then(result => {
         app.listen(3000);
     })
